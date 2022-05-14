@@ -32,7 +32,6 @@ public class ServerServiceImplementation implements ServerService {
         return serverRepo.save(server);
     }
 
-
     @Override
     public Server ping(String ipAddress) throws IOException{
 
@@ -62,7 +61,6 @@ public class ServerServiceImplementation implements ServerService {
     @Override
     public Server update(Server server) {
         log.info("Updating server: {}", server.getName());
-
         return serverRepo.save(server);
     }
 

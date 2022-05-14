@@ -5,7 +5,6 @@ import com.example.servermanagerbackend.model.Response;
 import com.example.servermanagerbackend.model.Server;
 import com.example.servermanagerbackend.service.implementation.ServerServiceImplementation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +13,6 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
 import java.util.Map;
 
 import static java.time.LocalDateTime.now;
@@ -62,6 +60,19 @@ public class ServerController {
                         .data(Map.of("server", serverServiceImplementation.create(server)))
                         .message("Server created")
                         .status(HttpStatus.CREATED)
+                        .statusCode(HttpStatus.CREATED.value())
+                        .build()
+        );
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Response> updateServer(@PathVariable @Valid Server server, Long serverId){
+        return ResponseEntity.ok(
+                Response.builder()
+                        .timeStamp(now())
+                        .data(Map.of("server", serverServiceImplementation.update(server)))
+                        .message("Server updated")
+                        .status(HttpStatus.OK)
                         .statusCode(HttpStatus.CREATED.value())
                         .build()
         );
